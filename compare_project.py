@@ -19,6 +19,9 @@ def CalcHash(name):
 ori_dict = {}
 ori_stack = []
 ori_path = sys.argv[1]
+if ori_path[-1] == '/':
+    ori_path = ori_path[:-2]
+src_pj_name = ori_path[ori_path.rfind('/') + 1:]
 
 
 ori_stack.append(ori_path)
@@ -29,7 +32,7 @@ while len(ori_stack) != 0:
         if os.path.isdir(files):
             ori_stack.append(os.getcwd() + '/' + files)
         elif os.path.isfile(files):
-            ori_strip_path = os.getcwd()[os.getcwd().find("runninglinuxkernel_5.0") + 23:]
+            ori_strip_path = os.getcwd()[os.getcwd().find(src_pj_name) + len(src_pj_name) + 1:]
             ori_dict[ ori_strip_path + '/'  + files] = CalcHash(files) 
 
 # move to cmp_path
